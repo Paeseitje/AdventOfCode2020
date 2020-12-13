@@ -80,6 +80,38 @@ namespace AdventOfCode2020.Puzzle
             return input;
         }
 
+        protected static List<string> LoadDataAsStringListBis(int day, int puzzle)
+        {
+            var input = new List<string>();
+            string line;
+            string totalLine = "";
+            try
+            {
+                using StreamReader sr = new StreamReader(GetPath(day, puzzle));
+                while (!sr.EndOfStream)
+                {
+                    line = sr.ReadLine();
+
+                    if(!string.IsNullOrEmpty(line)) 
+                    {
+                        totalLine += line;
+                        totalLine += " ";
+
+                    }
+                    else
+                    {
+                        input.Add(totalLine);
+                        totalLine = "";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return input;
+        }
+
         protected static List<List<string>> LoadDataListAsStringListList(int day, int puzzle)
         {
             List<List<string>> list = new List<List<string>>();
