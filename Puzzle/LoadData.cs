@@ -57,6 +57,29 @@ namespace AdventOfCode2020.Puzzle
             return input;
         }
 
+
+        protected static List<string> LoadDataListAsStringList(int day, int puzzle)
+        {
+            List<string> input = new List<string>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(GetPath(day, puzzle)))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        input.Add(sr.ReadLine());
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return input;
+        }
+
         protected static List<List<string>> LoadDataListAsStringListList(int day, int puzzle)
         {
             List<List<string>> list = new List<List<string>>();
