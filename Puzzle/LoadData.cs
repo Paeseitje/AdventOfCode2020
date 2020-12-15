@@ -133,6 +133,28 @@ namespace AdventOfCode2020.Puzzle
             }
             return list;
         }
+
+        public static List<string> GetInputAsStringList(int day, int puzzle)
+        {
+            List<string> list = new List<string>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(GetPath(day, puzzle)))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        list.Add(sr.ReadLine());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return list;
+        }
     }
 
 }
