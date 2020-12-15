@@ -30,11 +30,10 @@ namespace AdventOfCode2020.Puzzle
 
         public static int Puzzle2()
         {
-            //var input = LoadDataAsStringListBis(6, 1);
-            var input = LoadDataListAsStringList(6, 1).Aggregate((x,y) => x + ":" + y);
+            var input = LoadDataAsStringListBis(6, 1);
             var result = 0;
 
-            foreach (var line in input)
+            foreach (string line in input)
             {
                 string trim = line.Trim();
                 var list = trim.Split(" ");
