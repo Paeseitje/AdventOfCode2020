@@ -57,6 +57,29 @@ namespace AdventOfCode2020.Puzzle
             return input;
         }
 
+        protected static List<List<int>> LoadDataListAsIntListList(int day, int puzzle)
+        {
+            List<List<int>> input = new List<List<int>>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(GetPath(day, puzzle)))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        var line = sr.ReadLine().Split(",").Select(int.Parse).ToList();
+                        input.Add(line);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return input;
+        }
 
         protected static List<string> LoadDataListAsStringList(int day, int puzzle)
         {
@@ -134,27 +157,9 @@ namespace AdventOfCode2020.Puzzle
             return list;
         }
 
-        public static List<string> GetInputAsStringList(int day, int puzzle)
-        {
-            List<string> list = new List<string>();
+        
 
-            try
-            {
-                using (StreamReader sr = new StreamReader(GetPath(day, puzzle)))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        list.Add(sr.ReadLine());
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
 
-            return list;
-        }
     }
 
 }
