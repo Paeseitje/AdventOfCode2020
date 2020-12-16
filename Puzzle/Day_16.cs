@@ -74,6 +74,9 @@ namespace AdventOfCode2020.Puzzle
         public static int Puzzle2()
         {
             var input = LoadDataListAsIntListList(16, 1);
+
+            var aantalInput = input.Count;
+            Console.WriteLine("Input contains {0} tickets", aantalInput);
             var invalidValues = new List<int>();
 
             foreach (var ticket in input)
@@ -134,7 +137,215 @@ namespace AdventOfCode2020.Puzzle
                     ticket.Clear();
                 }
             }
+
+            //Threads.RemoveAll(list => list.Count == 0);
+            var cleandupInput = input.RemoveAll(list => list.Count == 0);
+
             var result = invalidValues.Sum();
+
+            //departure location: 50-688 or 707-966
+            //departure station: 33-340 or 351-960
+            //departure platform: 42-79 or 105-954
+            //departure track: 46-928 or 943-959
+            //departure date: 42-464 or 482-974
+            //departure time: 25-595 or 614-972
+
+            Console.WriteLine("input list is cleaned");
+            var aantalTicketsValid = input.Count;
+            Console.WriteLine("Input now contains {0} tickets", aantalTicketsValid);
+
+            int dep_location = -1;
+            int dep_station = -1;
+            int dep_platform = -1;
+            int dep_track = -1;
+            int dep_date = -1;
+            int dep_time = -1;
+
+            for (int i = 0; i < input.Count; i++)
+            {
+                Console.WriteLine("We are at index {0}", i.ToString());
+                var list_index = new List<int>();
+                foreach (var ticket in input)
+                {
+                    list_index.Add(ticket[i]);
+                }
+
+                var dep_location_Valid = false;
+                var dep_station_Valid = false;
+                var dep_platform_Valid = false;
+                var dep_track_Valid = false;
+                var dep_date_Valid = false;
+                var dep_time_Valid = false;
+
+                // find dep_location index
+                if (dep_location == -1)
+                {
+                    foreach (int nr in list_index)
+                    {
+                        Console.WriteLine(nr.ToString());
+                        if ((nr >= 50 && nr <= 688) || (nr >= 707 && nr <= 966))
+                        {
+                            Console.WriteLine("Nr {0} is valid for dep_location", nr.ToString());
+                            dep_location_Valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nr {0} is not valid for dep_location", nr.ToString());
+                            dep_location_Valid = false;
+                            break;
+                        }
+                    }
+                }
+                
+                // find dep_station index
+                if (dep_station == -1)
+                {
+                    foreach (int nr in list_index)
+                    {
+                        //33-340 or 351-960
+                        Console.WriteLine(nr.ToString());
+                        if ((nr >= 33 && nr <= 340) || (nr >= 351 && nr <= 960))
+                        {
+                            Console.WriteLine("Nr {0} is valid for dep_station", nr.ToString());
+                            dep_station_Valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nr {0} is not valid for dep_station", nr.ToString());
+                            dep_station_Valid = false;
+                            break;
+                        }
+                    }
+                }
+
+                // find dep_platform index
+                if (dep_platform == -1)
+                {
+                    foreach (int nr in list_index)
+                    {
+                        //42 - 79 or 105 - 954
+                        Console.WriteLine(nr.ToString());
+                        if ((nr >= 42 && nr <= 79) || (nr >= 105 && nr <= 954))
+                        {
+                            Console.WriteLine("Nr {0} is valid for dep_platform", nr.ToString());
+                            dep_platform_Valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nr {0} is not valid for dep_platform", nr.ToString());
+                            dep_platform_Valid = false;
+                            break;
+                        }
+                    }
+                }
+
+                // find dep_track index
+                if (dep_track == -1)
+                {
+                    foreach (int nr in list_index)
+                    {
+                        //46-928 or 943-959
+                        Console.WriteLine(nr.ToString());
+                        if ((nr >= 46 && nr <= 928) || (nr >= 943 && nr <= 959))
+                        {
+                            Console.WriteLine("Nr {0} is valid for dep_track", nr.ToString());
+                            dep_track_Valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nr {0} is not valid for dep_track", nr.ToString());
+                            dep_track_Valid = false;
+                            break;
+                        }
+                    }
+                }
+
+                // find dep_date index
+                if (dep_date == -1)
+                {
+                    foreach (int nr in list_index)
+                    {
+                        //42-464 or 482-974
+                        Console.WriteLine(nr.ToString());
+                        if ((nr >= 42 && nr <= 464) || (nr >= 482 && nr <= 974))
+                        {
+                            Console.WriteLine("Nr {0} is valid for dep_date", nr.ToString());
+                            dep_date_Valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nr {0} is not valid for dep_date", nr.ToString());
+                            dep_date_Valid = false;
+                            break;
+                        }
+                    }
+                }
+
+                // find dep_time index
+                if (dep_time == -1)
+                {
+                    foreach (int nr in list_index)
+                    {
+                        //25-595 or 614-972
+                        Console.WriteLine(nr.ToString());
+                        if ((nr >= 25 && nr <= 595) || (nr >= 614 && nr <= 972))
+                        {
+                            Console.WriteLine("Nr {0} is valid for dep_time", nr.ToString());
+                            dep_time_Valid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nr {0} is not valid for dep_time", nr.ToString());
+                            dep_time_Valid = false;
+                            break;
+                        }
+                    }
+                }
+
+
+                if (dep_location_Valid && dep_location == -1)
+                {
+                    dep_location = i;
+                    Console.WriteLine("Index of dep_location is {0}", dep_location.ToString());
+                }
+                if (dep_station_Valid && dep_station == -1)
+                {
+                    dep_station = i;
+                    Console.WriteLine("Index of dep_station is {0}", dep_station.ToString());
+                }
+                if (dep_platform_Valid && dep_platform == -1)
+                {
+                    dep_platform = i;
+                    Console.WriteLine("Index of dep_platform is {0}", dep_platform.ToString());
+                }
+                if (dep_track_Valid && dep_track == -1)
+                {
+                    dep_track = i;
+                    Console.WriteLine("Index of dep_track is {0}", dep_track.ToString());
+                }
+                if (dep_date_Valid && dep_date == -1)
+                {
+                    dep_date = i;
+                    Console.WriteLine("Index of dep_time is {0}", dep_date.ToString());
+                }
+                if (dep_time_Valid && dep_time == -1)
+                {
+                    dep_time = i;
+                    Console.WriteLine("Index of dep_time is {0}", dep_time.ToString());
+                }
+
+
+            }
+            Console.WriteLine("dep_location Index = {0}", dep_location.ToString());
+            Console.WriteLine("dep_station Index = {0}", dep_station.ToString());
+            Console.WriteLine("dep_platform Index = {0}", dep_platform.ToString());
+            Console.WriteLine("dep_track Index = {0}", dep_track.ToString());
+            Console.WriteLine("dep_date Index = {0}", dep_date.ToString());
+            Console.WriteLine("dep_time Index = {0}", dep_time.ToString());
+
+
+
+
 
             return result;
 
