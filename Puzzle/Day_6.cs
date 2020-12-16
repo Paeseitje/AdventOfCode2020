@@ -41,17 +41,18 @@ namespace AdventOfCode2020.Puzzle
                 var numberOfGroups = list.Count();
 
 
+               
+                var dist = "";
+                // if its more that 1 person, make answers for each person distinct
+                // add answers together and get all answers that occure multiple times
                 if (numberOfGroups > 1)
                 {
-                    IEnumerable<char> CommonList = null;
+                    dist = list.Aggregate((x, y) => string.Concat(x.Intersect(y)));
+                    foreach (var item in dist) { Console.WriteLine(item); }
 
-                    for (int i = 0; i < numberOfGroups - 1; i++)
-                    {
-                        var dist_i = list[i].Distinct();
-                        var dist_ii = list[i + 1].Distinct();
-                        CommonList = dist_i.Intersect(dist_ii);
-                    }
-                    result += CommonList.Count();
+                    result += dist.Length;
+                    Console.WriteLine("Result is now {0}", result);
+                    Console.WriteLine(" ");
                 }
                 else
                 {
