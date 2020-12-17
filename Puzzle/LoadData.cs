@@ -45,7 +45,8 @@ namespace AdventOfCode2020.Puzzle
                     while (!sr.EndOfStream)
                     {
                         var line = sr.ReadLine();
-                        input = line.Split(',').Select(int.Parse).ToList();
+                        input.Add(int.Parse(line));
+                        //input = line.Split(',').Select(int.Parse).ToList();
 
                     }
                 }
