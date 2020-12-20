@@ -10,15 +10,15 @@ namespace AdventOfCode2020
         static void Main(string[] args)
         {
 
-            int day = 18;
+            int day = 12;
 
-            //Console.WriteLine("Starting puzzle 1");
-            //var solve1 = Day_18.Puzzle1();
-            //Console.WriteLine("Solution to puzzle 1 of day {0}: {1}", day, solve1);
+            Console.WriteLine("Starting puzzle 1");
+            var solve1 = Day_12.Puzzle1();
+            Console.WriteLine("Solution to puzzle 1 of day {0}: {1}", day, solve1);
 
-            Console.WriteLine("Starting puzzle 2");
-            var solve2 = Day_18.Puzzle2();
-            Console.WriteLine("Solution to puzzle 2 of day {0}: {1}", day, solve2);
+            //Console.WriteLine("Starting puzzle 2");
+            //var solve2 = Day_12.Puzzle2();
+            //Console.WriteLine("Solution to puzzle 2 of day {0}: {1}", day, solve2);
         }
     }
 }
