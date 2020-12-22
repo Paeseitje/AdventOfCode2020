@@ -62,7 +62,7 @@ namespace AdventOfCode2020.Puzzle
                                 }
                                 break;
                             case 180:
-                                if (direction != "south" || direction != "west")
+                                if (!(direction == "south" || direction == "west"))
                                 {
                                     var current_direction_index = compas_points.IndexOf(direction);
                                     direction = compas_points[current_direction_index + 2];
@@ -106,7 +106,7 @@ namespace AdventOfCode2020.Puzzle
                                 }
                                 break;
                             case 180:
-                                if (direction != "east" || direction != "north")
+                                if ( !(direction == "east" || direction == "north") )
                                 {
                                     var current_direction_index = compas_points.IndexOf(direction);
                                     direction = compas_points[current_direction_index - 2];
@@ -138,22 +138,22 @@ namespace AdventOfCode2020.Puzzle
                         break;
                     case "N": //adding distance to north
                         var rel_value_north = value - compas["south"];
-                        compas["north"] = rel_value_north;
+                        compas["north"] = value +  rel_value_north;
                         compas["south"] = 0;
                         break;
                     case "E": //adding distance to east
                         var rel_value_east = value - compas["west"];
-                        compas["east"] = rel_value_east;
+                        compas["east"] = value + rel_value_east;
                         compas["west"] = 0;
                         break;
                     case "S": //adding distance to south
                         var rel_value_south = value - compas["north"];
-                        compas["south"] = rel_value_south;
+                        compas["south"] = value + rel_value_south;
                         compas["north"] = 0;
                         break;
                     case "W": //adding distance to west
                         var rel_value_west = value - compas["east"];
-                        compas["west"] = rel_value_west;
+                        compas["west"] = value + rel_value_west;
                         compas["east"] = 0;
                         break;
                     default:
