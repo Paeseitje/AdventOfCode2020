@@ -11,27 +11,32 @@ namespace AdventOfCode2020.Puzzle
         public static long Puzzle1()
         {
             var input = new List<int>() 
-            //{ 5, 8, 6, 4, 3, 9, 1, 7, 2 };
+            { 5, 8, 6, 4, 3, 9, 1, 7, 2 };
 
             //test case : na 10x 92658374, na 100x 67384529
-            { 3, 8, 9, 1, 2, 5, 4, 6, 7 };
+            //{ 3, 8, 9, 1, 2, 5, 4, 6, 7 };
 
-            var iterations = 10;
+            var iterations = 100;
 
-            // starting position
+            // starting position - first number in list
+            //var current_cup = 5;
+            
+            // test case 
             var current_cup = 3;
 
-            // keep track of relative position in the list, so you can go back to ind 0 at the end of the list
+            // keep track of relative position in the list, so you can go back to index 0 at the end of the list
             var index = 0;
 
             for (int i = 1; i <= iterations; i++)
             {
+                Console.WriteLine("Index: {0}", index);
                 Console.WriteLine("Round {0}:", i);
                 Console.WriteLine("cups: {0}",string.Join(" ", input));
                 // index of current cup
                 var index_current = input.IndexOf(current_cup);
                 var take_3 = new List<int>();
 
+                // take the 3 next cups - depends on where you are in the list
                 if (index_current < 6)
                 {
                     take_3 = input.Skip(index_current + 1).Take(3).ToList();
@@ -65,11 +70,14 @@ namespace AdventOfCode2020.Puzzle
 
                 // detirmine the destination (index value in shortned list) of where the 3 items needs to be put
                 // current - 1 (if in list) -> keep checking untill the number is less then the lowest number available then pick the highest number available as dsetination
-
+                // DetermineDestination gives the index of the destination cub
+                // destination_index is the location where the 3 nrs needs te be inserted
                 var destination_index = DetermineDestination(input, current_cup) + 1;
                 Console.WriteLine("Destination: {0}", input[destination_index -1]);
 
-                if (destination_index < input.Count -1)
+
+                // insert the 3 cups in the correct place:
+                if (destination_index <= input.Count -1)
                 {
                     
                     for (int tk = 0; tk < 3; tk++)
@@ -88,13 +96,14 @@ namespace AdventOfCode2020.Puzzle
                 Console.WriteLine("New cups order: {0}", string.Join(" ", input));
 
 
-                //index += 1;
-
-                if (index < 8)
+                // keep track of the position in the list -> if the relative position reaches the end, start from the first position
+                if (index < 8) // if my index = 8, then I am at the end of the list and need to go to index 0
                 {
-                    var new_cup_index = input.IndexOf(current_cup) + 1;
-                    if (new_cup_index < 8)
+
+                    var index_current_cup = input.IndexOf(current_cup); // if this index < 8 -> set new cup
+                    if (index_current_cup < 8)
                     {
+                        var new_cup_index = input.IndexOf(current_cup) + 1;
                         current_cup = input[new_cup_index];
                         Console.WriteLine("New current cup : {0}", current_cup.ToString());
                         index += 1;
@@ -114,7 +123,7 @@ namespace AdventOfCode2020.Puzzle
                 }
             }
 
-            // order of cups starting at 1 without 1
+            // formulate aswer : order of cups starting at 1 without 1
 
             var pos_of_1 = input.IndexOf(1);
             var answer = new List<int>();
